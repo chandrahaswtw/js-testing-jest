@@ -21,7 +21,12 @@ We need to install jest globally as below:
 ```
 npm install jest --global
 ```
-Now we need to run as below (basic syntax)
+To run all tests we can use just
+```
+jest
+```
+
+Now we need to run a specific test we can run below (basic syntax)
 ```
 jest my-test --notify --config=config.json
 ```
@@ -39,6 +44,12 @@ This asks a few questions:
 - What test environment you want for testing - Choose jsdom for example and so on.
 
 This finally creates a jest.config.json where we can do extra configuration 
+
+## Increase timeout
+
+```
+jest.setTimeout(30000);
+```
 
 
 
