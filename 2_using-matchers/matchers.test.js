@@ -44,6 +44,12 @@ describe("Jest matchers", () => {
 
     // Arrays contain check to see if an element is present
     expect(arr).toContain(3);
+
+    // -----Arrays length
+    // Basic syntax
+    expect(arr.length).toBe(4);
+    // Recommended syntax
+    expect(arr).toHaveLength(4);
   });
 
   it("Testing how .not works", () => {
