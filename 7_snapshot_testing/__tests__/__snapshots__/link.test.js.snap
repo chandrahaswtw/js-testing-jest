@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<a
+  className="normal"
+  href="http://www.facebook.com"
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+>
+  Facebook
+</a>
+`;
+
+exports[`will check the matchers and pass - Updated 1`] = `
+{
+  "createdAt": 422,
+  "id": 440,
+  "name": "LeBron James",
+}
+`;
+
+exports[`will check the matchers and pass 1`] = `
+{
+  "createdAt": Any<Date>,
+  "id": Any<Number>,
+  "name": "LeBron James",
+}
+`;
