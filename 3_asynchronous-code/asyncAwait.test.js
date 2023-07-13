@@ -41,6 +41,9 @@ describe("General Async await testing", () => {
   });
 
   it("Reject case -> Error message", async () => {
+    // Use expect.assertions(1) where ever possible as if promise is resolved successfully, and didn't touch the catch block it doesn't go to catch block.
+    // We are forcing to have 1 assertion here.
+    expect.assertions(1);
     try {
       await asyncPromiseRejectThrowErrorMessage();
     } catch (e) {
