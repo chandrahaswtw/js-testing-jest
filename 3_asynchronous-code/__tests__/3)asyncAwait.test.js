@@ -54,6 +54,7 @@ describe("General Async await testing", () => {
 });
 
 // Recommended
+// It looks similar to what we did for promises recommended way as well.
 describe("Recommended await testing", () => {
   it("Resolve case", async () => {
     await expect(asyncPromiseResolve()).resolves.toBe("Jest testing");

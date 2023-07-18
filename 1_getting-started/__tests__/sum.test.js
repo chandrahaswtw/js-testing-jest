@@ -1,4 +1,4 @@
-const sum = require("./sum");
+const sum = require("../src/sum");
 
 /* 
     describe ("Test suite",() => {})  The call back cannot be async

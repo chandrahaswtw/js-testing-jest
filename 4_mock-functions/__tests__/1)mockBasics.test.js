@@ -1,20 +1,9 @@
-const axios = require("axios");
-const foobar = require("./foo-bar");
-
-const getAllUsers = () => {
-  return axios.get("/users.json").then((resp) => resp.data);
-};
-
 // This function loops through array of items and passes to callback
 const forEachFunc = (items, callback) => {
   for (let i of items) {
     callback(i);
   }
 };
-
-// Add this outside describe.
-jest.mock("axios");
-jest.mock("./foo-bar");
 
 describe("Mock functions", () => {
   it("Basic Mocking", () => {
@@ -47,6 +36,9 @@ describe("Mock functions", () => {
 
     // Check how many calls are made
     expect(mockFunc.mock.calls).toHaveLength(3);
+
+    //(Recommended) We can use this as well to track the number of times a function been called.
+    expect(mockFunc).toHaveBeenCalledTimes(3);
 
     // There are no simpler version for all the below as we are testing multiple calls at once.
 
@@ -116,49 +108,32 @@ describe("Mock functions", () => {
     expect(mockFunc2.mock.calls[1][0]).toBe(23);
   });
 
-  it("mock imported modules", () => {
-    // Don't forget to add the folder path outside describe as jest.mock("./foo-bar");
-    // When we use the above statement, we can use .mockImplementation() directly in imported function.
-    foobar.mockImplementation(() => 42);
-    expect(foobar()).toBe(42);
-
-    // Twice
-    foobar
-      .mockImplementationOnce(() => true)
-      .mockImplementationOnce(() => false);
-    expect(foobar()).toBe(true);
-    expect(foobar()).toBe(false);
-
-    // The .mockImplementationOnce also available directly on jest.fn(). See below
-    // Infact the above foo has a jest.fn() wrapper around it when we just done jest.mock("./foo-bar")
-
-    //mockImplementationOnce chain returns values first and the turns to default implementation
-    const mockFunc1 = jest
-      .fn(() => "default")
-      .mockImplementationOnce(() => "first call")
-      .mockImplementationOnce(() => "second call");
-
-    expect(mockFunc1()).toBe("first call");
-    expect(mockFunc1()).toBe("second call");
-    expect(mockFunc1()).toBe("default");
-    expect(mockFunc1()).toBe("default");
-  });
-
-  it("Mock axios", () => {
-    // Add this outside describe.
-    // jest.mock('axios')
-    const users = [{ name: "Bob" }];
-    const resp = { data: users };
-    axios.get.mockImplementation(() => Promise.resolve(resp));
-
-    // We can use this as well.
-    // axios.get.mockResolvedValue(resp);
-
-    expect(getAllUsers()).resolves.toEqual(users);
-  });
-
   it("mock names", () => {
     const mockFunc = jest.fn().mockName("add42");
     expect(mockFunc.getMockName()).toBe("add42");
   });
 });
+
+/*
+If we print console.log(jest.fn()) it gives this
+[Function: func] {
+        _isMockFunction: true,
+        getMockImplementation: [Function (anonymous)],
+        mock: [Getter/Setter],
+        mockClear: [Function (anonymous)],
+        mockReset: [Function (anonymous)],
+        mockRestore: [Function (anonymous)],
+        mockReturnValueOnce: [Function (anonymous)],
+        mockResolvedValueOnce: [Function (anonymous)],
+        mockRejectedValueOnce: [Function (anonymous)],
+        mockReturnValue: [Function (anonymous)],
+        mockResolvedValue: [Function (anonymous)],
+        mockRejectedValue: [Function (anonymous)],
+        mockImplementationOnce: [Function (anonymous)],
+        withImplementation: [Function: bound withImplementation],
+        mockImplementation: [Function (anonymous)],
+        mockReturnThis: [Function (anonymous)],
+        mockName: [Function (anonymous)],
+        getMockName: [Function (anonymous)]
+      }
+*/

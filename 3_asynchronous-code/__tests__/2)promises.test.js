@@ -49,7 +49,8 @@ describe("Recommended way of testing promises", () => {
     );
   });
 
-  // toMatch or toBe is used if error message is sent in reject .
+  // toMatch or toBe is used if error message is sent in reject.
+  // As we know toMatch is used in case to check the regular expressions.
   // We must place a return statement before we are resolving a promise.
   it("the fetch fails with an error", () => {
     return expect(asyncPromiseRejectThrowErrorMessage()).rejects.toMatch(
