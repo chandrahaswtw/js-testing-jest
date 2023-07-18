@@ -1,3 +1,5 @@
+// We call this style of mocks -> Automatic mock
+
 const axios = require("axios");
 
 const getAllUsers = () => {
@@ -7,6 +9,13 @@ const getAllUsers = () => {
 
 // Add this outside describe.
 jest.mock("axios");
+
+// This is a good practice to clear the mocks before each test.
+// This clears all the instances, constructor function and all the methods.
+beforeEach(() => {
+  // Clear all instances and calls to constructor and all methods:
+  axios.mockClear();
+});
 
 describe("Mock third party libraries", () => {
   it("Mock axios", () => {

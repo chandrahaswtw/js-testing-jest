@@ -115,8 +115,10 @@ describe("Mock functions", () => {
 });
 
 /*
+
+NOTE1:
 If we print console.log(jest.fn()) it gives this
-[Function: func] {
+[Function: mockConstructor] {
         _isMockFunction: true,
         getMockImplementation: [Function (anonymous)],
         mock: [Getter/Setter],
@@ -136,4 +138,18 @@ If we print console.log(jest.fn()) it gives this
         mockName: [Function (anonymous)],
         getMockName: [Function (anonymous)]
       }
+
+NOTE2:
+func = jest.fn(()=> 5)
+func() will return 5
+var obj =  new func()
+obj ==> {}  Empty object
+
+NOTE3:
+func = jest.fn(()=> {
+  return {key : 5}
+})
+func() will return {key : 5}  Same as above
+var obj = new func()
+obj ==> {key : 5}
 */

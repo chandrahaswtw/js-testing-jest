@@ -1,12 +1,21 @@
+// We call this style of mocks -> Automatic mock
+
 const foobar = require("../src/foo-bar");
 
 // Add this outside describe.
 jest.mock("../src/foo-bar");
 
+// This is a good practice to clear the mocks before each test.
+// This clears all the instances, constructor function and all the methods.
+beforeEach(() => {
+  foobar.func.mockClear();
+});
+
 //The above combination mocks every key that returned frm the foobar
 
 describe("Mock imported modules", () => {
   it("Prove all the values are mocked", () => {
+    console.log("foobar is", foobar);
     console.log("func is", foobar.func);
     console.log("key1 is", foobar.key1);
     console.log("key2 is", foobar.key2);
