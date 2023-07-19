@@ -67,3 +67,9 @@ jest --env=node
 ```
 jest.setTimeout(30000);
 ```
+
+## Run jest in watch mode
+
+```
+jest --watch
+```
