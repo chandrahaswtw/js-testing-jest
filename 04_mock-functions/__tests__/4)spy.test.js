@@ -16,6 +16,35 @@ describe("Spy testing", () => {
     // Spy can take 2 paramaters: First is the module, second is the key it need to spy
     const mockFn = jest.spyOn(foobar, "funcSpy").mockImplementation(() => 5);
 
+    // After this foobar becomes below:
+    // Spy just mocks the particular key and other remain untouched.
+    // {
+    //   func: [Function: func],
+    //   funcSpy: [Function: mockConstructor] {
+    //     _isMockFunction: true,
+    //     getMockImplementation: [Function (anonymous)],
+    //     mock: [Getter/Setter],
+    //     mockClear: [Function (anonymous)],
+    //     mockReset: [Function (anonymous)],
+    //     mockRestore: [Function (anonymous)],
+    //     mockReturnValueOnce: [Function (anonymous)],
+    //     mockResolvedValueOnce: [Function (anonymous)],
+    //     mockRejectedValueOnce: [Function (anonymous)],
+    //     mockReturnValue: [Function (anonymous)],
+    //     mockResolvedValue: [Function (anonymous)],
+    //     mockRejectedValue: [Function (anonymous)],
+    //     mockImplementationOnce: [Function (anonymous)],
+    //     withImplementation: [Function: bound withImplementation],
+    //     mockImplementation: [Function (anonymous)],
+    //     mockReturnThis: [Function (anonymous)],
+    //     mockName: [Function (anonymous)],
+    //     getMockName: [Function (anonymous)]
+    //   },
+    //   key1: 1,
+    //   key2: 2,
+    //   key3: { func: [Function: func] }
+    // }
+
     // We are calling the actual function foobar.funcSpy()
     const funcSpyValue = foobar.funcSpy();
     // Now the mockFn is executed as we mocked.
