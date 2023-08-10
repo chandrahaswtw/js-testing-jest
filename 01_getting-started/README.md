@@ -74,6 +74,6 @@ jest.setTimeout(30000);
 jest --watch
 ```
 
-## Run only one test
+## Run only one test suite/test
 
-Use `describe.only` to run that particular describe and `it.only` to run only that particular test. This only works for tests in a single file but not for all the files.
+Use `describe.only` to run that particular test suite and `it.only` to run only that particular test. This only works for tests in a single file but not for all the files.
