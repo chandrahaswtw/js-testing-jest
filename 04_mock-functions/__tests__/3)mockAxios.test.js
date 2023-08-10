@@ -47,3 +47,42 @@ describe("Mock third party libraries", () => {
     expect(axios.get).toHaveBeenCalledWith("/users.json");
   });
 });
+
+// IMPORTANT NOTE 1
+/*
+There might be a case where you don't want to mock everything inside a 3rd party module:
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useParams: jest.fn(),
+  useNavigate: jest.fn(),
+}));
+*/
+
+// IMPORTANT NOTE 2
+/*
+The issue with 3rd party libraries is that if we write a mock statement as below:
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useParams: jest.fn(() => 5),
+  useNavigate: jest.fn(),
+}));
+The useParams() will be a mocked fn (jest.fn()) might not return 5 due to many reasons of how the original module is created.
+To combat this we will do as below:
+
+STEP 1: Import the original functionalties from the module
+import {useParams, useNavigate } from "react-router-dom";
+
+STEP 2: Selectively mock without specifying the return statements:
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useParams: jest.fn(),
+  useNavigate: jest.fn(),
+}));
+
+STEP 3: Mock them in the individual test case:
+it("Should render posts component", async () => {
+    useParams.mockReturnValue({ id: 44 });
+})
+
+This does a clean job.
+*/
